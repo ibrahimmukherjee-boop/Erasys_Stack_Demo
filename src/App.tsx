@@ -10,7 +10,9 @@ import {
   Menu,
   X,
   Bot,
-  Activity
+  Activity,
+  Radio,
+  Sliders
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { DashboardOverview } from '@/sections/DashboardOverview';
@@ -20,8 +22,10 @@ import { GoalMonitor } from '@/sections/GoalMonitor';
 import { AegisHITL } from '@/sections/AegisHITL';
 import { RepoSync } from '@/sections/RepoSync';
 import { SettingsPanel } from '@/sections/SettingsPanel';
+import { Sonar } from '@/sections/Sonar';
+import { FineTune } from '@/sections/FineTune';
 
-type View = 'dashboard' | 'builder' | 'trust' | 'goals' | 'aegis' | 'repos' | 'settings';
+type View = 'dashboard' | 'builder' | 'trust' | 'goals' | 'aegis' | 'repos' | 'settings' | 'sonar' | 'finetune';
 
 const navItems: { id: View; label: string; icon: React.ElementType }[] = [
   { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
@@ -30,6 +34,8 @@ const navItems: { id: View; label: string; icon: React.ElementType }[] = [
   { id: 'goals', label: 'Goal Monitor', icon: Target },
   { id: 'aegis', label: 'Aegis HITL', icon: UserCheck },
   { id: 'repos', label: 'Repo Sync', icon: GitBranch },
+  { id: 'sonar', label: 'Sonar', icon: Radio },
+  { id: 'finetune', label: 'Fine-Tune', icon: Sliders },
   { id: 'settings', label: 'Settings', icon: Settings },
 ];
 
@@ -55,6 +61,10 @@ export default function App() {
         return <AegisHITL />;
       case 'repos':
         return <RepoSync />;
+      case 'sonar':
+        return <Sonar />;
+      case 'finetune':
+        return <FineTune />;
       case 'settings':
         return <SettingsPanel />;
       default:
@@ -93,7 +103,7 @@ export default function App() {
         </div>
 
         {/* Nav Items */}
-        <nav className="flex-1 py-4 px-2 space-y-1">
+        <nav className="flex-1 py-4 px-2 space-y-1 overflow-y-auto">
           {navItems.map((item) => {
             const Icon = item.icon;
             return (
